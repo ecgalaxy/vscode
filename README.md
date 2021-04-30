@@ -6,12 +6,12 @@ Installs Visual Studio Code - https://code.visualstudio.com/
 Requirements
 ------------
 
-None.
+See https://code.visualstudio.com/docs/supporting/requirements
 
 Role Variables
 --------------
 
-None.
+* vscode_mirror: the package repositories base URL
 
 Dependencies
 ------------
