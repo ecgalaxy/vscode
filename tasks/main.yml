@@ -1,0 +1,32 @@
+---
+- name: Import key (APT)
+  apt_key:
+    url: "{{ vscode_mirror }}/keys/microsoft.asc"
+    state: present
+  become: true
+  when: ansible_os_family == 'Debian'
+
+- name: Enable vscode repository (APT)
+  apt_repository:
+    repo: "deb [arch=amd64] {{ vscode_mirror }}/repos/vscode stable main"
+    filename: vscode
+    state: present
+  become: true
+  when: ansible_os_family == 'Debian'
+
+- name: Enable vscode repository (Yum)
+  yum_repository:
+    name: vscode
+    description: Visual Studio Code repository
+    state: present
+    baseurl: "{{ vscode_mirror }}/yumrepos/vscode"
+    gpgkey: "{{ vscode_mirror }}/keys/microsoft.asc"
+    gpgcheck: yes
+  become: true
+  when: ansible_os_family == 'RedHat'
+
+- name: Install vscode
+  package:
+    name: code
+    state: present
+  become: true
