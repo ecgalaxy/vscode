@@ -30,3 +30,9 @@
     name: code
     state: present
   become: true
+
+- name: Install extensions
+  command: "code --install-extension {{ item }}"
+  with_items: "{{ vscode_extensions }}"
+  register: result
+  changed_when: "'already installed' not in result.stdout"
