@@ -25,6 +25,13 @@
   become: true
   when: ansible_os_family == 'RedHat'
 
+- name: Install missing package dependencies (gh/vscode/issues/17142)
+  package:
+    name: libX11-xcb
+    state: present
+  become: true
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version > '7'
+
 - name: Install vscode
   package:
     name: code
