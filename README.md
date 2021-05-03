@@ -12,16 +12,21 @@ Role Variables
 --------------
 
 * vscode_mirror: the package repositories base URL
+* vscode_extensions: the list of extensions to be installed (default: empty)
+
+Example:
+
+```yaml
+vscode_extensions:
+  - fortifyvsts.fortify-extension-for-vs-code
+  - ms-azuretools.vscode-docker
+  - ms-vscode-remote.remote-containers
+```
 
 Dependencies
 ------------
 
 * optional: ecgalaxy.bootstrap
-
-Example Playbook
-----------------
-
-TODO.
 
 License
 -------
