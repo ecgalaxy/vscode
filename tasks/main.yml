@@ -22,6 +22,7 @@
     baseurl: "{{ vscode_mirror }}/yumrepos/vscode"
     gpgkey: "{{ vscode_mirror }}/keys/microsoft.asc"
     gpgcheck: yes
+    includepkgs: code
   become: true
   when: ansible_os_family == 'RedHat'
 
