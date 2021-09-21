@@ -2,6 +2,10 @@
 - name: Prepare
   hosts: all
   tasks:
+    - name: Create vscode_user
+      user:
+        name: "vscode_user"
+        state: present
     - name: Update apt cache
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
