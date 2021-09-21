@@ -11,3 +11,15 @@
       assert:
         that:
           - "bin.stat.exists"
+    - name: "Get stat location vscode extensions directory"
+      stat:
+        path: "/home/vscode_user/.vscode/extensions"
+      register: directory
+    - name: "Assertions vscode extensions directory"
+      assert:
+        that:
+          - "directory.stat.exists"
+          - "directory.stat.isdir"
+          - "directory.stat.mode == '0755'"
+          - "directory.stat.pw_name == 'vscode_user'"
+          - "directory.stat.gr_name == 'vscode_user'"

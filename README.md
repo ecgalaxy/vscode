@@ -13,6 +13,7 @@ Role Variables
 
 * vscode_mirror: the package repositories base URL
 * vscode_extensions: the list of extensions to be installed (default: empty)
+* vscode_user: vscode end user.
 
 Example:
 
