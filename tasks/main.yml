@@ -48,7 +48,7 @@
 - name: Install vscode
   package:
     name: code
-    state: present
+    state: latest
   become: true
 
 - name: Install extensions 
