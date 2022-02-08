@@ -1,7 +1,7 @@
 ECGALAXY vscode role
 ====================
 
-Installs Visual Studio Code - https://code.visualstudio.com/
+Installs Visual Studio Code and extensions - https://code.visualstudio.com/
 
 Requirements
 ------------
@@ -32,7 +32,9 @@ Dependencies
 License
 -------
 
-EUPL-1.2
+Copyright the European Union 2022.
+
+Licensed under the EUPL-1.2 or later.
 
 Author Information
 ------------------

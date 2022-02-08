@@ -11,7 +11,7 @@
       assert:
         that:
           - "bin.stat.exists"
-    - name: "Get stat location vscode extensions directory"
+    - name: Get stat location vscode extensions directory
       stat:
         path: "/home/vscode_user/.vscode/extensions"
       register: directory
