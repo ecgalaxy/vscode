@@ -9,7 +9,7 @@
       - ms-vscode-remote.remote-containers
   tasks:
     - name: Include vscode
-      include_role:
+      ansible.builtin.include_role:
         name: "vscode"
   environment:
     http_proxy: "{{ lookup('env', 'http_proxy') }}"

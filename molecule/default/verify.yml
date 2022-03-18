@@ -4,19 +4,19 @@
   gather_facts: false
   tasks:
     - name: Check binary file
-      stat:
+      ansible.builtin.stat:
         path: /usr/bin/code
       register: bin
     - name: Assert that vscode is installed
-      assert:
+      ansible.builtin.assert:
         that:
           - "bin.stat.exists"
     - name: Get stat location vscode extensions directory
-      stat:
+      ansible.builtin.stat:
         path: "/home/vscode_user/.vscode/extensions"
       register: directory
     - name: "Assertions vscode extensions directory"
-      assert:
+      ansible.builtin.assert:
         that:
           - "directory.stat.exists"
           - "directory.stat.isdir"

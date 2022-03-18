@@ -1,13 +1,13 @@
 ---
 - name: Import key (APT)
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ vscode_mirror }}/keys/microsoft.asc"
     state: present
   become: true
   when: ansible_os_family == 'Debian'
 
 - name: Enable vscode repository (APT)
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] {{ vscode_mirror }}/repos/vscode stable main"
     filename: vscode
     state: present
@@ -15,7 +15,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Enable vscode repository (Yum)
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: vscode
     description: Visual Studio Code repository
     state: present
@@ -27,7 +27,7 @@
   when: ansible_os_family == 'RedHat'
 
 - name: Install missing package dependencies Debian (gh/ms/vscode/issues/121640)
-  package:
+  ansible.builtin.package:
     name:
       - libxshmfence1
       - libasound2
@@ -37,7 +37,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Install missing package dependencies RedHat (gh/ms/vscode/issues/17142)
-  package:
+  ansible.builtin.package:
     name:
       - libxshmfence
       - libX11-xcb
@@ -46,20 +46,20 @@
   when: ansible_os_family == 'RedHat' and ansible_distribution_major_version > '7'
 
 - name: Install vscode
-  package:
+  ansible.builtin.package:
     name: code
     state: latest
   become: true
 
-- name: Install extensions 
-  command: "code --install-extension {{ item }}"
+- name: Install extensions
+  ansible.builtin.command: "code --install-extension {{ item }}"
   with_items: "{{ vscode_extensions }}"
   register: result
   changed_when: "'already installed' not in result.stdout"
   when: vscode_user | length == 0
 
 - name: Install extensions for vscode_user
-  command: "code --install-extension {{ item }}"
+  ansible.builtin.command: "code --install-extension {{ item }}"
   with_items: "{{ vscode_extensions }}"
   register: result
   changed_when: "'already installed' not in result.stdout"

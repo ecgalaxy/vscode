@@ -3,15 +3,15 @@
   hosts: all
   tasks:
     - name: Create vscode_user
-      user:
+      ansible.builtin.user:
         name: "vscode_user"
         state: present
     - name: Update apt cache
-      apt: update_cache=yes cache_valid_time=600
+      ansible.builtin.apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
       changed_when: false
     - name: Install vscode installer dependencies
-      apt:
+      ansible.builtin.apt:
         name:
           - gpg-agent
         state: present
