@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   vars:
-    vscode_user: vscode_user
+    vscode_user: ansible
     vscode_extensions:
       - fortifyvsts.fortify-extension-for-vs-code
       - ms-azuretools.vscode-docker
