@@ -1,4 +1,5 @@
 ---
 vscode_mirror: "https://packages.microsoft.com"
+vscode_keyring: "/usr/share/keyrings/vscode-archive-keyring.asc"
 vscode_extensions: []
 vscode_user: ""

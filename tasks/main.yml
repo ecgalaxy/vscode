@@ -1,14 +1,24 @@
 ---
 - name: Import key (APT)
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: "{{ vscode_mirror }}/keys/microsoft.asc"
-    state: present
+    dest: "{{ vscode_keyring }}"
+    mode: '0644'
+    force: true
+  become: true
+  when: ansible_os_family == 'Debian'
+
+- name: Disable vscode repository not using keyring (APT)
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] {{ vscode_mirror }}/repos/vscode stable main"
+    filename: vscode
+    state: absent
   become: true
   when: ansible_os_family == 'Debian'
 
 - name: Enable vscode repository (APT)
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] {{ vscode_mirror }}/repos/vscode stable main"
+    repo: "deb [arch=amd64 signed-by={{ vscode_keyring }}] {{ vscode_mirror }}/repos/vscode stable main"
     filename: vscode
     state: present
   become: true
