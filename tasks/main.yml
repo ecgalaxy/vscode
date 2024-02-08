@@ -1,4 +1,9 @@
 ---
+- name: Set package name (Amazon Linux 2)
+  ansible.builtin.set_fact:
+    vscode_package: "code-1.85.2-1705561377.el7.x86_64"
+  when: ansible_distribution == 'Amazon' and ansible_distribution_major_version|int < 2023
+
 - name: Import key (APT)
   ansible.builtin.get_url:
     url: "{{ vscode_mirror }}/keys/microsoft.asc"
@@ -57,7 +62,7 @@
 
 - name: Install vscode
   ansible.builtin.package:
-    name: code
+    name: "{{ vscode_package }}"
     state: latest
   become: true
 
