@@ -8,7 +8,7 @@
   ansible.builtin.get_url:
     url: "{{ vscode_mirror }}/keys/microsoft.asc"
     dest: "{{ vscode_keyring }}"
-    mode: '0644'
+    mode: 'u=rw,go=r'
     force: true
   become: true
   when: ansible_os_family == 'Debian'
@@ -36,7 +36,7 @@
     state: present
     baseurl: "{{ vscode_mirror }}/yumrepos/vscode"
     gpgkey: "{{ vscode_mirror }}/keys/microsoft.asc"
-    gpgcheck: yes
+    gpgcheck: true
     includepkgs: code
   become: true
   when: ansible_os_family == 'RedHat'
@@ -49,7 +49,7 @@
       - libunwind8
     state: present
   become: true
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and ansible_distribution_major_version|int < 24
 
 - name: Install missing package dependencies RedHat (gh/ms/vscode/issues/17142)
   ansible.builtin.package:
@@ -63,7 +63,7 @@
 - name: Install vscode
   ansible.builtin.package:
     name: "{{ vscode_package }}"
-    state: latest
+    state: latest # noqa package-latest
   become: true
 
 - name: Install extensions

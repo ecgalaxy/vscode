@@ -9,13 +9,16 @@ galaxy_info:
     - name: Amazon Linux
       versions:
         - "2"
+        - "2023"
     - name: EL
       versions:
         - "8"
+        - "9"
     - name: Ubuntu
       versions:
         - focal
         - jammy
+        - noble
   galaxy_tags:
     - development
 dependencies: []
