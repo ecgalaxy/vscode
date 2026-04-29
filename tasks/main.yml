@@ -28,6 +28,7 @@
     state: present
   become: true
   when: ansible_os_family == 'Debian'
+  changed_when: false
 
 - name: Enable vscode repository (Yum)
   ansible.builtin.yum_repository:
